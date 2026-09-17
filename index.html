@@ -1,983 +1,1273 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f7dce7">
-  <title>Para Ximena Flavia ❤️</title>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Portafolio profesional de un Ingeniero en Ciberseguridad especializado en redes, seguridad ofensiva, consultoría e implementación tecnológica."
+  />
+  <meta name="theme-color" content="#07090E" />
+
+  <title>Jean Piere Guzmán | Candidato - Ing. de Ciberseguridad</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              bg: "#07090E",
+              panel: "#0D111A",
+              green: "#00FF66",
+              cyan: "#00E5FF",
+              text: "#E6EDF3",
+              muted: "#8B949E",
+              border: "#202938"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            mono: ["Fira Code", "monospace"]
+          },
+          boxShadow: {
+            neonGreen: "0 0 35px rgba(0,255,102,0.12)",
+            neonCyan: "0 0 35px rgba(0,229,255,0.12)"
+          },
+          animation: {
+            "pulse-slow": "pulse 4s ease-in-out infinite",
+            "float": "float 5s ease-in-out infinite",
+            "grid": "gridMove 20s linear infinite"
+          },
+          keyframes: {
+            float: {
+              "0%, 100%": {
+                transform: "translateY(0px)"
+              },
+              "50%": {
+                transform: "translateY(-10px)"
+              }
+            },
+            gridMove: {
+              "0%": {
+                transform: "translate(0, 0)"
+              },
+              "100%": {
+                transform: "translate(50px, 50px)"
+              }
+            }
+          }
+        }
+      }
+    };
+  </script>
 
   <style>
-    :root {
-      --rosa: #e8a9bf;
-      --rosa-claro: #f8dfe9;
-      --rosa-fuerte: #d66f9a;
-      --lavanda: #d9c7ed;
-      --blanco: #fffaf7;
-      --texto: #5e4652;
-      --sombra: rgba(130, 75, 100, 0.16);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     html {
       scroll-behavior: smooth;
     }
 
     body {
-      min-height: 100vh;
+      background: #07090e;
+      color: #e6edf3;
+      font-family: "Inter", sans-serif;
       overflow-x: hidden;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      color: var(--texto);
-      background:
-        radial-gradient(circle at top left, #f9dce8 0%, transparent 30%),
-        radial-gradient(circle at bottom right, #dfd2f2 0%, transparent 35%),
-        linear-gradient(135deg, #fffaf7, #f8e8ef, #eee7f6);
     }
 
-    /* =========================
-       FONDO DE CORAZONES
-    ========================== */
-    .heart-container {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 0;
+    ::selection {
+      background: rgba(0, 255, 102, 0.22);
+      color: #ffffff;
     }
 
-    .floating-heart {
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #07090e;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #202938;
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff66;
+    }
+
+    .cyber-grid {
       position: absolute;
-      bottom: -40px;
-      color: rgba(214, 111, 154, 0.4);
-      font-size: 20px;
-      animation: floatUp linear infinite;
-      filter: blur(0.2px);
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-      }
-
-      10% {
-        opacity: 0.7;
-      }
-
-      80% {
-        opacity: 0.5;
-      }
-
-      100% {
-        transform: translateY(-115vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* =========================
-       PANTALLA DE BIENVENIDA
-    ========================== */
-    .welcome-screen {
-      position: fixed;
       inset: 0;
-      z-index: 20;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 20% 20%, #f4cedd, transparent 40%),
-        radial-gradient(circle at 80% 80%, #dcd0ef, transparent 40%),
-        var(--blanco);
-      transition:
-        opacity 1s ease,
-        visibility 1s ease;
-    }
-
-    .welcome-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .welcome-card {
-      width: min(680px, 95vw);
-      padding: 55px 30px;
-      border: 1px solid rgba(255,255,255,0.8);
-      border-radius: 30px;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 25px 70px var(--sombra);
-    }
-
-    .welcome-card h1,
-    .section-title,
-    .letter-title {
-      font-family: "Brush Script MT", "Segoe Script", cursive;
-      font-weight: 600;
-    }
-
-    .welcome-card h1 {
-      font-size: clamp(3rem, 9vw, 6rem);
-      color: var(--rosa-fuerte);
-      margin-bottom: 10px;
-    }
-
-    .welcome-card p {
-      font-size: 1.05rem;
-      margin-bottom: 30px;
-    }
-
-    .main-button,
-    .yes-button,
-    .reveal-button {
-      border: none;
-      padding: 15px 28px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 700;
-      color: white;
-      background: linear-gradient(135deg, var(--rosa-fuerte), #b95c88);
-      box-shadow: 0 12px 30px rgba(185, 92, 136, 0.25);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .main-button:hover,
-    .yes-button:hover,
-    .reveal-button:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 17px 35px rgba(185, 92, 136, 0.35);
-    }
-
-    /* =========================
-       CONTENIDO PRINCIPAL
-    ========================== */
-    .main-content {
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(35px);
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(
+          90deg,
+          rgba(0, 229, 255, 0.045) 1px,
+          transparent 1px
+        );
+      background-size: 50px 50px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
       pointer-events: none;
-      transition: opacity 1s ease, transform 1s ease;
     }
 
-    .main-content.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+    .glow-green {
+      box-shadow:
+        0 0 0 1px rgba(0, 255, 102, 0.08),
+        0 0 30px rgba(0, 255, 102, 0.09),
+        inset 0 0 30px rgba(0, 255, 102, 0.025);
     }
 
-    section {
-      width: min(1100px, 92%);
-      margin: 0 auto;
-      padding: 100px 0;
+    .glow-cyan {
+      box-shadow:
+        0 0 0 1px rgba(0, 229, 255, 0.08),
+        0 0 30px rgba(0, 229, 255, 0.09),
+        inset 0 0 30px rgba(0, 229, 255, 0.025);
     }
 
-    .hero {
-      min-height: 95vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+    .gradient-line {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #00ff66,
+        #00e5ff,
+        transparent
+      );
     }
 
-    .hero-box {
-      width: min(850px, 100%);
-      padding: 50px 25px;
+    .glass {
+      background: rgba(13, 17, 26, 0.72);
+      border: 1px solid rgba(139, 148, 158, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
-    .hero h2 {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-family: "Brush Script MT", "Segoe Script", cursive;
-      color: var(--rosa-fuerte);
-      margin-bottom: 20px;
+    .interactive-card {
+      transition:
+        transform 300ms ease,
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        background 300ms ease;
     }
 
-    .hero p {
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.8;
-      font-size: 1.12rem;
+    .interactive-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(0, 255, 102, 0.28);
+      box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.3),
+        0 0 35px rgba(0, 255, 102, 0.07);
     }
 
-    /* =========================
-       TITULOS
-    ========================== */
-    .section-title {
-      text-align: center;
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      color: var(--rosa-fuerte);
-      margin-bottom: 45px;
-    }
-
-    /* =========================
-       PREGUNTA
-    ========================== */
-    .question-section {
-      text-align: center;
-    }
-
-    .question-card {
-      position: relative;
-      min-height: 420px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      padding: 40px;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 20px 55px var(--sombra);
-      overflow: hidden;
-    }
-
-    .question-card h3 {
-      font-family: "Brush Script MT", "Segoe Script", cursive;
-      font-size: clamp(2.5rem, 7vw, 4rem);
-      color: #c65f89;
-    }
-
-    .answer-area {
-      width: min(450px, 100%);
-      min-height: 160px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-      position: relative;
-    }
-
-    .yes-button {
-      position: relative;
-      z-index: 3;
-      font-size: 1.1rem;
-      padding: 16px 35px;
-    }
-
-    .no-button {
-      position: relative;
-      z-index: 2;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 700;
-      color: #765767;
-      background: #eee2ea;
-      transition: left 0.18s ease, top 0.18s ease, transform 0.18s ease;
-    }
-
-    /* =========================
-       MENSAJES
-    ========================== */
-    .messages-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .message-card {
-      min-height: 180px;
-      padding: 30px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.72);
-      box-shadow: 0 15px 35px var(--sombra);
+    .reveal {
       opacity: 0;
-      transform: translateY(35px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(24px);
+      transition:
+        opacity 800ms ease,
+        transform 800ms ease;
     }
 
-    .message-card.visible {
+    .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .message-card p {
-      font-family: "Brush Script MT", "Segoe Script", cursive;
-      font-size: 1.9rem;
-      line-height: 1.3;
-      color: #b75980;
-    }
-
-    /* =========================
-       GALERÍA POLAROID
-    ========================== */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .polaroid {
-      padding: 12px 12px 35px;
-      background: #fff;
-      border-radius: 4px;
-      box-shadow: 0 18px 35px rgba(80, 50, 65, 0.16);
-      transition: transform 0.35s ease;
-    }
-
-    .polaroid:nth-child(1) {
-      transform: rotate(-3deg);
-    }
-
-    .polaroid:nth-child(2) {
-      transform: rotate(2deg);
-    }
-
-    .polaroid:nth-child(3) {
-      transform: rotate(-2deg);
-    }
-
-    .polaroid:hover {
-      transform: rotate(0) translateY(-10px) scale(1.03);
-    }
-
-    .polaroid img {
-      width: 100%;
-      aspect-ratio: 1 / 1.05;
-      object-fit: cover;
-      display: block;
-      background: linear-gradient(135deg, #f4d8e4, #e2d6ef);
-    }
-
-    .polaroid figcaption {
-      text-align: center;
-      padding-top: 16px;
-      font-family: "Brush Script MT", "Segoe Script", cursive;
-      font-size: 1.4rem;
-      color: #81566a;
-    }
-
-    /* =========================
-       CARTA / SOBRE
-    ========================== */
-    .letter-section {
-      text-align: center;
-    }
-
-    .envelope {
-      position: relative;
-      width: min(650px, 95%);
-      min-height: 390px;
-      margin: 0 auto;
-      cursor: pointer;
-      perspective: 1000px;
-    }
-
-    .envelope-body {
-      position: absolute;
-      inset: 60px 0 0;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #f8dce7, #efd0df);
-      box-shadow: 0 25px 50px var(--sombra);
-      overflow: hidden;
-    }
-
-    .envelope-flap {
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      height: 190px;
-      z-index: 3;
-      clip-path: polygon(0 0, 50% 68%, 100% 0);
-      background: linear-gradient(145deg, #edc1d3, #dfb0c6);
-      transform-origin: top;
-      transition: transform 1s ease;
-    }
-
-    .envelope-heart {
-      position: absolute;
-      top: 185px;
-      left: 50%;
-      z-index: 5;
-      transform: translate(-50%, -50%);
-      font-size: 58px;
-      transition: opacity 0.5s ease;
-    }
-
-    .letter {
-      position: absolute;
-      left: 6%;
-      bottom: 10px;
-      width: 88%;
-      min-height: 330px;
-      z-index: 2;
-      padding: 35px;
-      border-radius: 15px;
-      background: #fffdfb;
-      box-shadow: 0 12px 30px rgba(80, 50, 65, 0.12);
-      text-align: left;
-      opacity: 0;
-      transform: translateY(80px);
+    .btn-primary {
       transition:
-        opacity 0.8s ease,
-        transform 0.9s ease;
-      overflow-y: auto;
-      max-height: 430px;
+        transform 200ms ease,
+        box-shadow 200ms ease,
+        background 200ms ease;
     }
 
-    .letter-title {
-      text-align: center;
-      font-size: 2.4rem;
-      color: var(--rosa-fuerte);
-      margin-bottom: 22px;
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 255, 102, 0.2);
     }
 
-    .letter p {
-      line-height: 1.9;
-      margin-bottom: 15px;
-      font-size: 1rem;
-    }
-
-    .envelope.open .envelope-flap {
-      transform: rotateX(180deg);
-    }
-
-    .envelope.open .envelope-heart {
-      opacity: 0;
-    }
-
-    .envelope.open .letter {
-      opacity: 1;
-      transform: translateY(-40px);
-      z-index: 6;
-    }
-
-    .letter-hint {
-      margin-top: 28px;
-      font-style: italic;
-      opacity: 0.7;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-    footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 45px 20px 65px;
-      font-family: "Brush Script MT", "Segoe Script", cursive;
-      font-size: 1.8rem;
-      color: #b75980;
-    }
-
-    /* =========================
-       CORAZONES DE CELEBRACIÓN
-    ========================== */
-    .celebration-heart {
-      position: fixed;
-      z-index: 999;
-      pointer-events: none;
-      font-size: 25px;
-      animation: celebration 2.5s ease-out forwards;
-    }
-
-    @keyframes celebration {
-      0% {
-        transform: translate(0, 0) scale(0.4) rotate(0deg);
-        opacity: 1;
-      }
-
-      100% {
-        transform:
-          translate(var(--x), var(--y))
-          scale(1.6)
-          rotate(var(--rotate));
-        opacity: 0;
-      }
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-    @media (max-width: 800px) {
-      .messages-grid,
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 75px 0;
-      }
-
-      .question-card {
-        min-height: 460px;
-      }
-
-      .answer-area {
-        min-height: 230px;
-      }
-
-      .envelope {
-        min-height: 450px;
-      }
-
-      .letter {
-        min-height: 360px;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .welcome-card {
-        padding: 40px 20px;
-      }
-
-      .hero-box {
-        padding: 30px 10px;
-      }
-
-      .question-card {
-        padding: 25px 12px;
-      }
-
-      .answer-area {
-        width: 100%;
-      }
-
-      .letter {
-        padding: 25px 20px;
-      }
+    .terminal-text {
+      font-family: "Fira Code", monospace;
     }
   </style>
 </head>
 
-<body>
+<body class="bg-cyber-bg text-cyber-text">
 
-  <!-- CORAZONES DE FONDO -->
-  <div class="heart-container" id="heartContainer"></div>
+  <header
+    id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#07090E]/80 backdrop-blur-xl"
+  >
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
 
-  <!-- =========================
-       BIENVENIDA
-  ========================== -->
-  <div class="welcome-screen" id="welcomeScreen">
-    <div class="welcome-card">
-      <h1>Para mi Ximena ❤️</h1>
-      <p>
-        Preparé algo pequeño, pero hecho con mucho cariño especialmente para ti.
-      </p>
+      <!-- Logo -->
+      <a href="#inicio" class="group flex items-center gap-3">
+        <div
+          class="flex h-10 w-10 items-center justify-center rounded-lg border border-cyber-green/20 bg-cyber-green/5"
+        >
+          <span class="terminal-text text-sm font-semibold text-cyber-green">
+            &gt;_
+          </span>
+        </div>
 
-      <button class="main-button" id="enterButton">
-        Hola mi Reina, presiona aquí
+        <div>
+          <p class="text-sm font-bold tracking-wide text-white">
+            Jean Piere Guzmán<span class="text-cyber-green">.</span>
+          </p>
+          <p class="terminal-text text-[10px] uppercase tracking-[0.18em] text-cyber-muted">
+            Cybersecurity Engineer Candidate
+          </p>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-8 md:flex">
+        <a
+          href="#inicio"
+          class="text-sm text-gray-400 transition hover:text-cyber-green"
+        >
+          Inicio
+        </a>
+
+        <a
+          href="#metricas"
+          class="text-sm text-gray-400 transition hover:text-cyber-green"
+        >
+          Métricas
+        </a>
+
+        <a
+          href="#servicios"
+          class="text-sm text-gray-400 transition hover:text-cyber-green"
+        >
+          Servicios
+        </a>
+
+        <a
+          href="#sobre-mi"
+          class="text-sm text-gray-400 transition hover:text-cyber-green"
+        >
+          Sobre mí
+        </a>
+
+        <a
+          href="#contacto"
+          class="rounded-lg border border-cyber-green/40 bg-cyber-green/10 px-4 py-2 text-sm font-semibold text-cyber-green transition hover:bg-cyber-green hover:text-black"
+        >
+          Contactar
+        </a>
+      </nav>
+
+      <button
+        id="menu-button"
+        class="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-gray-300 md:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <i data-lucide="menu" class="h-5 w-5"></i>
       </button>
     </div>
-  </div>
 
-  <!-- =========================
-       CONTENIDO PRINCIPAL
-  ========================== -->
-  <main class="main-content" id="mainContent">
+    <div
+      id="mobile-menu"
+      class="hidden border-t border-white/5 bg-[#090D16]/95 px-5 py-5 md:hidden"
+    >
+      <div class="mx-auto flex max-w-7xl flex-col gap-4">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-box">
-        <h2>Hola, mi Ximena ❤️</h2>
+        <a
+          href="#inicio"
+          class="mobile-link rounded-lg px-3 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-cyber-green"
+        >
+          Inicio
+        </a>
 
-        <p>
-          Hay personas que llegan a nuestra vida y simplemente hacen que
-          todo se sienta un poquito más bonito.
-          Tú eres una de esas personas para mí.
-        </p>
+        <a
+          href="#metricas"
+          class="mobile-link rounded-lg px-3 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-cyber-green"
+        >
+          Métricas
+        </a>
+
+        <a
+          href="#servicios"
+          class="mobile-link rounded-lg px-3 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-cyber-green"
+        >
+          Servicios
+        </a>
+
+        <a
+          href="#sobre-mi"
+          class="mobile-link rounded-lg px-3 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-cyber-green"
+        >
+          Sobre mí
+        </a>
+
+        <a
+          href="#contacto"
+          class="mobile-link mt-1 rounded-lg border border-cyber-green/30 bg-cyber-green/10 px-3 py-2 text-center text-sm font-semibold text-cyber-green"
+        >
+          Contactar
+        </a>
       </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section
+      id="inicio"
+      class="relative flex min-h-screen items-center overflow-hidden pt-24"
+    >
+      <div class="cyber-grid animate-grid"></div>
+
+      <div
+        class="absolute left-[-10%] top-[15%] h-[420px] w-[420px] rounded-full bg-cyber-green/5 blur-[120px]"
+      ></div>
+
+      <div
+        class="absolute right-[-10%] top-[20%] h-[420px] w-[420px] rounded-full bg-cyber-cyan/5 blur-[120px]"
+      ></div>
+
+      <div class="relative z-10 mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 lg:py-32">
+        <div class="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+
+          <div class="reveal">
+
+            <div
+              class="mb-7 inline-flex items-center gap-2 rounded-full border border-cyber-green/20 bg-cyber-green/5 px-4 py-2"
+            >
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyber-green opacity-70"
+                ></span>
+                <span
+                  class="relative inline-flex h-2 w-2 rounded-full bg-cyber-green"
+                ></span>
+              </span>
+
+              <span class="terminal-text text-xs text-cyber-green">
+                SISTEMAS · REDES · SEGURIDAD
+              </span>
+            </div>
+
+            <h1
+              class="max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
+            >
+              Blindando
+              <span
+                class="bg-gradient-to-r from-cyber-green to-cyber-cyan bg-clip-text text-transparent"
+              >
+                infraestructuras.
+              </span>
+              <br />
+              Mitigando riesgos.
+            </h1>
+
+            <p class="mt-7 max-w-2xl text-base leading-8 text-cyber-muted sm:text-lg">
+              Candidato a Ingeniería de Ciberseguridad especializado en redes,
+              seguridad ofensiva, análisis de riesgos e implementación
+              de soluciones tecnológicas orientadas a proteger
+              infraestructuras digitales.
+            </p>
+
+            <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#servicios"
+                class="btn-primary inline-flex items-center justify-center gap-2 rounded-lg bg-cyber-green px-6 py-3.5 text-sm font-bold text-black"
+              >
+                Ver Servicios
+                <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </a>
+
+              <a
+                href="#contacto"
+                class="inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold text-white transition hover:border-cyber-cyan/30 hover:bg-cyber-cyan/5 hover:text-cyber-cyan"
+              >
+                Hablemos
+                <i data-lucide="message-square" class="h-4 w-4"></i>
+              </a>
+            </div>
+
+            <div class="mt-12">
+              <p class="mb-4 terminal-text text-xs uppercase tracking-[0.18em] text-gray-600">
+                Áreas de especialización
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                <span class="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-xs text-gray-400">
+                  Pentesting
+                </span>
+
+                <span class="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-xs text-gray-400">
+                  Red Team
+                </span>
+
+                <span class="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-xs text-gray-400">
+                  Blue Team
+                </span>
+
+                <span class="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-xs text-gray-400">
+                  Networking
+                </span>
+
+                <span class="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-xs text-gray-400">
+                  SIEM
+                </span>
+
+                <span class="rounded-md border border-white/10 bg-white/[0.02] px-3 py-2 text-xs text-gray-400">
+                  Hardening
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal lg:justify-self-end">
+            <div
+              class="glass relative overflow-hidden rounded-2xl border border-white/10 p-5 shadow-2xl shadow-black/30"
+            >
+              <div class="absolute inset-x-0 top-0 h-px gradient-line"></div>
+
+              <div class="mb-5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="h-2.5 w-2.5 rounded-full bg-red-400/70"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-yellow-400/70"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-green-400/70"></span>
+                </div>
+
+                <span class="terminal-text text-[10px] text-gray-600">
+                  security-console
+                </span>
+              </div>
+
+              <!-- Terminal -->
+              <div class="rounded-xl border border-white/5 bg-black/30 p-5">
+                <p class="terminal-text text-xs leading-7 text-gray-500">
+                  <span class="text-cyber-green">$</span>
+                  whoami
+                </p>
+
+                <p class="terminal-text text-sm text-gray-200">
+                  cybersecurity_engineer
+                </p>
+
+                <p class="mt-3 terminal-text text-xs leading-7 text-gray-500">
+                  <span class="text-cyber-green">$</span>
+                  cat specialization.txt
+                </p>
+
+                <p class="terminal-text text-xs leading-7 text-cyber-cyan">
+                  NETWORK SECURITY<br />
+                  PENTESTING<br />
+                  SECURITY CONSULTING<br />
+                  TECHNOLOGY IMPLEMENTATION
+                </p>
+
+                <p class="mt-3 terminal-text text-xs leading-7 text-gray-500">
+                  <span class="text-cyber-green">$</span>
+                  system_status
+                </p>
+
+                <div class="mt-1 flex items-center gap-2 terminal-text text-xs">
+                  <span class="h-2 w-2 rounded-full bg-cyber-green"></span>
+                  <span class="text-cyber-green">
+                    ALL SYSTEMS SECURED
+                  </span>
+                </div>
+              </div>
+
+              <div class="mt-5 grid grid-cols-2 gap-3">
+                <div class="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                  <p class="terminal-text text-[10px] text-gray-600">
+                    STATUS
+                  </p>
+                  <p class="mt-1 text-sm font-semibold text-white">
+                    Active
+                  </p>
+                </div>
+
+                <div class="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                  <p class="terminal-text text-[10px] text-gray-600">
+                    FOCUS
+                  </p>
+                  <p class="mt-1 text-sm font-semibold text-white">
+                    Security
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <a
+        href="#metricas"
+        class="absolute bottom-7 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-gray-600 transition hover:text-cyber-green md:flex"
+      >
+        <span class="terminal-text text-[10px]">SCROLL</span>
+        <i data-lucide="chevron-down" class="h-4 w-4 animate-bounce"></i>
+      </a>
     </section>
 
-    <!-- PREGUNTA -->
-    <section class="question-section">
-      <h2 class="section-title">Tengo una pregunta...</h2>
+    <section id="metricas" class="relative border-y border-white/5 bg-[#090D16]">
+      <div class="mx-auto max-w-7xl px-5 py-24 sm:px-8">
 
-      <div class="question-card" id="questionCard">
-        <h3>¿Me quieres?</h3>
+        <div class="reveal mb-12 max-w-2xl">
+          <p class="terminal-text text-xs uppercase tracking-[0.25em] text-cyber-green">
+            01 / Métricas
+          </p>
 
-        <div class="answer-area" id="answerArea">
-          <button class="yes-button" id="yesButton">Sí ❤️</button>
-          <button class="no-button" id="noButton">No 😈</button>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Experiencia respaldada por práctica.
+          </h2>
+
+          <p class="mt-4 leading-7 text-cyber-muted">
+            Resultados cuantificables y experiencia práctica en laboratorios,
+            auditorías y proyectos de seguridad.
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2">
+
+          <article
+            class="interactive-card reveal glow-green rounded-2xl border border-cyber-green/10 bg-cyber-panel/80 p-7"
+          >
+            <div class="flex items-start justify-between gap-6">
+              <div>
+                <p class="terminal-text text-xs uppercase tracking-[0.18em] text-gray-500">
+                  Hack The Box
+                </p>
+
+                <div class="mt-3 flex items-end gap-3">
+                  <span class="text-5xl font-extrabold text-cyber-green">
+                    +7
+                  </span>
+
+                  <span class="mb-2 text-sm text-gray-400">
+                    máquinas
+                  </span>
+                </div>
+
+                <p class="mt-3 text-sm leading-6 text-gray-500">
+                  Laboratorios y máquinas comprometidas como parte
+                  del entrenamiento en seguridad ofensiva.
+                </p>
+              </div>
+
+              <div
+                class="hidden h-12 w-12 items-center justify-center rounded-xl border border-cyber-green/20 bg-cyber-green/5 sm:flex"
+              >
+                <i
+                  data-lucide="terminal"
+                  class="h-5 w-5 text-cyber-green"
+                ></i>
+              </div>
+            </div>
+          </article>
+
+          <article
+            class="interactive-card reveal glow-cyan rounded-2xl border border-cyber-cyan/10 bg-cyber-panel/80 p-7"
+          >
+            <div class="flex items-start justify-between gap-6">
+              <div>
+                <p class="terminal-text text-xs uppercase tracking-[0.18em] text-gray-500">
+                  Servicios preprofesionales
+                </p>
+
+                <div class="mt-3 flex items-end gap-3">
+                  <span class="text-5xl font-extrabold text-cyber-cyan">
+                    +3
+                  </span>
+
+                  <span class="mb-2 text-sm text-gray-400">
+                    proyectos
+                  </span>
+                </div>
+
+                <p class="mt-3 text-sm leading-6 text-gray-500">
+                  Servicios, auditorías y trabajos técnicos realizados
+                  en entornos de infraestructura y ciberseguridad reales.
+                </p>
+              </div>
+
+              <div
+                class="hidden h-12 w-12 items-center justify-center rounded-xl border border-cyber-cyan/20 bg-cyber-cyan/5 sm:flex"
+              >
+                <i
+                  data-lucide="shield-check"
+                  class="h-5 w-5 text-cyber-cyan"
+                ></i>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
 
-    <!-- MENSAJES -->
-    <section>
-      <h2 class="section-title">Algunas cosas que quiero que recuerdes</h2>
+    <section class="relative">
+      <div class="mx-auto max-w-7xl px-5 py-24 sm:px-8">
 
-      <div class="messages-grid">
+        <div class="reveal text-center">
+          <p class="terminal-text text-xs uppercase tracking-[0.25em] text-gray-500">
+            Empresas y colaboradores
+          </p>
 
-        <article class="message-card">
-          <p>Eres mi persona favorita ❤️</p>
-        </article>
+          <h2 class="mt-3 text-2xl font-bold text-white sm:text-3xl">
+            Organizaciones con las que he trabajado
+          </h2>
 
-        <article class="message-card">
-          <p>Me haces muy feliz, Ximena.</p>
-        </article>
+          <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-cyber-muted">
+            Espacio reservado para incorporar logos de empresas,
+            clientes o instituciones.
+          </p>
+        </div>
 
-        <article class="message-card">
-          <p>Contigo, hasta los días normales se sienten especiales.</p>
-        </article>
+        <div class="reveal mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
 
-        <article class="message-card">
-          <p>Amo tu forma de ser, tu sarcasmo, tus vibras, todo de tí</p>
-        </article>
+          <div
+            class="group flex h-24 items-center justify-center rounded-xl border border-white/5 bg-white/[0.02] transition hover:border-cyber-green/20 hover:bg-cyber-green/[0.03]"
+          >
+            <span class="terminal-text text-xs tracking-widest text-gray-600 transition group-hover:text-gray-300">
+              EMPRESA 01
+            </span>
+          </div>
 
-        <article class="message-card">
-          <p>Mi vida es infinitamente mejor desde que tú estás en ella :3</p>
-        </article>
+          <div
+            class="group flex h-24 items-center justify-center rounded-xl border border-white/5 bg-white/[0.02] transition hover:border-cyber-green/20 hover:bg-cyber-green/[0.03]"
+          >
+            <span class="terminal-text text-xs tracking-widest text-gray-600 transition group-hover:text-gray-300">
+              EMPRESA 02
+            </span>
+          </div>
 
-        <article class="message-card">
-          <p>Recuerda que aquí estaré para ti, mi reina, te amo ❤️</p>
-        </article>
+          <div
+            class="group flex h-24 items-center justify-center rounded-xl border border-white/5 bg-white/[0.02] transition hover:border-cyber-green/20 hover:bg-cyber-green/[0.03]"
+          >
+            <span class="terminal-text text-xs tracking-widest text-gray-600 transition group-hover:text-gray-300">
+              EMPRESA 03
+            </span>
+          </div>
+
+          <div
+            class="group flex h-24 items-center justify-center rounded-xl border border-white/5 bg-white/[0.02] transition hover:border-cyber-green/20 hover:bg-cyber-green/[0.03]"
+          >
+            <span class="terminal-text text-xs tracking-widest text-gray-600 transition group-hover:text-gray-300">
+              EMPRESA 04
+            </span>
+          </div>
+
+          <div
+            class="group flex h-24 items-center justify-center rounded-xl border border-white/5 bg-white/[0.02] transition hover:border-cyber-green/20 hover:bg-cyber-green/[0.03]"
+          >
+            <span class="terminal-text text-xs tracking-widest text-gray-600 transition group-hover:text-gray-300">
+              EMPRESA 05
+            </span>
+          </div>
+
+          <div
+            class="group flex h-24 items-center justify-center rounded-xl border border-white/5 bg-white/[0.02] transition hover:border-cyber-green/20 hover:bg-cyber-green/[0.03]"
+          >
+            <span class="terminal-text text-xs tracking-widest text-gray-600 transition group-hover:text-gray-300">
+              EMPRESA 06
+            </span>
+          </div>
+
+        </div>
 
       </div>
     </section>
 
-    <!-- GALERÍA -->
-    <section>
-      <h2 class="Guardo tus fotos para recordar a la reina a la que amo ❤️</h2>
+    <!-- ======================================
+         SERVICIOS
+    =========================================== -->
+    <section id="servicios" class="border-y border-white/5 bg-[#090D16]">
+      <div class="mx-auto max-w-7xl px-5 py-24 sm:px-8">
 
-      <div class="gallery">
+        <div class="reveal mb-12">
+          <p class="terminal-text text-xs uppercase tracking-[0.25em] text-cyber-green">
+            02 / Servicios
+          </p>
 
-        <figure class="polaroid">
-          <img src="/img/FOTO_1.jpeg" alt="foto 1">
-          <figcaption>Toda una Reina ❤️</figcaption>
-        </figure>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Seguridad aplicada a tu infraestructura.
+          </h2>
 
-        <figure class="polaroid">
-          <img src="/img/FOTO_2.jpeg" alt="foto 2">
-          <figcaption>Expresiones que amo :3</figcaption>
-        </figure>
+          <p class="mt-4 max-w-2xl leading-7 text-cyber-muted">
+            Servicios enfocados en identificar riesgos, reducir superficies
+            de ataque y fortalecer la seguridad tecnológica.
+          </p>
+        </div>
 
-        <figure class="polaroid">
-          <img src="/img/FOTO_3.jpeg" alt="foto 3">
-          <figcaption>Esos ojitos que me gustan tanto ✨</figcaption>
-        </figure>
+        <div class="grid gap-5 lg:grid-cols-3">
 
+          <!-- Servicio 1 -->
+          <article
+            class="interactive-card reveal group rounded-2xl border border-white/10 bg-cyber-panel p-7"
+          >
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-xl border border-cyber-green/20 bg-cyber-green/5 transition group-hover:bg-cyber-green/10"
+            >
+              <i
+                data-lucide="network"
+                class="h-6 w-6 text-cyber-green"
+              ></i>
+            </div>
+
+            <p class="mt-7 terminal-text text-xs text-gray-600">
+              SERVICE_01
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold text-white">
+              Seguridad en Redes
+            </h3>
+
+            <p class="mt-4 text-sm leading-7 text-cyber-muted">
+              Evaluación y fortalecimiento de infraestructuras de red
+              para mejorar la disponibilidad, segmentación y resistencia
+              frente a amenazas.
+            </p>
+
+            <div class="mt-7 space-y-3">
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-cyber-green"></i>
+                Hardening
+              </div>
+
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-cyber-green"></i>
+                Segmentación de red
+              </div>
+
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-cyber-green"></i>
+                Auditorías de infraestructura
+              </div>
+            </div>
+          </article>
+
+          <!-- Servicio 2 -->
+          <article
+            class="interactive-card reveal group rounded-2xl border border-white/10 bg-cyber-panel p-7"
+          >
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-xl border border-cyber-cyan/20 bg-cyber-cyan/5 transition group-hover:bg-cyber-cyan/10"
+            >
+              <i
+                data-lucide="search-check"
+                class="h-6 w-6 text-cyber-cyan"
+              ></i>
+            </div>
+
+            <p class="mt-7 terminal-text text-xs text-gray-600">
+              SERVICE_02
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold text-white">
+              Seguridad Ofensiva / Pentesting
+            </h3>
+
+            <p class="mt-4 text-sm leading-7 text-cyber-muted">
+              Evaluación de seguridad mediante técnicas de reconocimiento, 
+              enumeración y explotación controlada para identificar vulnerabilidades
+              reales y medir la superficie de ataque de una Organización
+            </p>
+
+            <div class="mt-7 space-y-3">
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-cyber-cyan"></i>
+                Análisis de riesgos
+              </div>
+
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-cyber-cyan"></i>
+                Gestión de vulnerabilidades
+              </div>
+
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-cyber-cyan"></i>
+                Pentesting de infraestructura y servicios
+              </div>
+            </div>
+          </article>
+
+          <!-- Servicio 3 -->
+          <article
+            class="interactive-card reveal group rounded-2xl border border-white/10 bg-cyber-panel p-7"
+          >
+            <div
+              class="flex h-12 w-12 items-center justify-center rounded-xl border border-purple-400/20 bg-purple-400/5 transition group-hover:bg-purple-400/10"
+            >
+              <i
+                data-lucide="server-cog"
+                class="h-6 w-6 text-purple-300"
+              ></i>
+            </div>
+
+            <p class="mt-7 terminal-text text-xs text-gray-600">
+              SERVICE_03
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold text-white">
+              Implementación Tecnológica
+            </h3>
+
+            <p class="mt-4 text-sm leading-7 text-cyber-muted">
+              Implementación y configuración de herramientas destinadas
+              a mejorar las capacidades de prevención, detección,
+              monitoreo y respuesta.
+            </p>
+
+            <div class="mt-7 space-y-3">
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-purple-300"></i>
+                SIEM
+              </div>
+
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-purple-300"></i>
+                EDR
+              </div>
+
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i data-lucide="check" class="h-4 w-4 text-purple-300"></i>
+                VPN y controles de acceso
+              </div>
+            </div>
+          </article>
+
+        </div>
       </div>
     </section>
 
-    <!-- CARTA -->
-    <section class="letter-section">
-      <h2 class="section-title">Tengo algo para ti... 💌</h2>
+    <!-- ==========================================
+         SOBRE MÍ
+    =========================================== -->
+    <section id="sobre-mi">
+      <div class="mx-auto max-w-7xl px-5 py-24 sm:px-8">
 
-      <div class="envelope" id="envelope">
+        <div class="grid items-center gap-14 lg:grid-cols-[0.8fr_1.2fr]">
 
-        <div class="envelope-body"></div>
+          <!-- Perfil visual -->
+          <div class="reveal">
+            <div
+              class="relative mx-auto max-w-md overflow-hidden rounded-3xl border border-white/10 bg-cyber-panel p-7"
+            >
+              <div
+                class="absolute right-[-50px] top-[-50px] h-48 w-48 rounded-full bg-cyber-green/5 blur-3xl"
+              ></div>
 
-        <div class="envelope-flap"></div>
+              <div
+                class="flex aspect-square items-center justify-center rounded-2xl border border-white/5 bg-black/30"
+              >
+                <div class="text-center">
+                  <div
+                    class="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl border border-cyber-green/20 bg-cyber-green/5"
+                  >
+                    <i
+                      data-lucide="shield"
+                      class="h-11 w-11 text-cyber-green"
+                    ></i>
+                  </div>
 
-        <div class="envelope-heart">❤️</div>
+                  <p class="mt-6 terminal-text text-xs text-gray-600">
+                    PROFILE_ID
+                  </p>
 
-        <article class="letter">
+                  <p class="mt-1 text-lg font-bold text-white">
+                    CYBERSECURITY
+                  </p>
 
-          <h3 class="letter-title">Para ti, Ximena</h3>
+                  <p class="mt-1 terminal-text text-xs text-cyber-green">
+                    SECURITY_ENGINEER
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <p>
-            Querida Ximena:
-          </p>
+          <!-- Texto -->
+          <div class="reveal">
+            <p class="terminal-text text-xs uppercase tracking-[0.25em] text-cyber-green">
+              03 / Sobre mí
+            </p>
 
-          <p>
-            Quería escribirte algo que pudiera guardar todos esos sentimientos
-            que a veces son difíciles de decir en persona.
-          </p>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Tecnología, análisis y seguridad.
+            </h2>
 
-          <p>
-            Desde que llegaste a mi vida, hay momentos que simplemente
-            tienen otro significado. Una conversación, una sonrisa,
-            una mirada o incluso un momento completamente sencillo
-            puede convertirse en un recuerdo que quiero conservar.
-          </p>
+            <div class="mt-7 space-y-5 text-sm leading-8 text-cyber-muted sm:text-base">
+              <p>
+                Soy un Candidato a Ingeniería de Ciberseguridad enfocado en comprender
+                cómo funcionan las infraestructuras tecnológicas y cómo
+                pueden fortalecerse frente a amenazas digitales.
+              </p>
 
-          <p>
-            Me gusta poder compartir tiempo contigo, reír contigo,
-            hablar de cualquier cosa y disfrutar incluso de esos momentos
-            en los que no hace falta decir demasiado.
-          </p>
+              <p>
+                Mi enfoque combina conocimientos de redes, sistemas,
+                seguridad ofensiva y defensiva para analizar problemas
+                desde diferentes perspectivas y desarrollar soluciones
+                prácticas.
+              </p>
 
-          <p>
-            Eres alguien muy especial para mí y quiero que sepas que
-            valoro muchísimo cada recuerdo, cada conversación y cada
-            instante que hemos compartido.
-          </p>
+              <p>
+                La seguridad ofensiva, el pentesting, la investigación
+                de vulnerabilidades y la implementación de controles
+                defensivos forman parte central de mi formación técnica.
+              </p>
+            </div>
 
-          <p>
-            No sé exactamente qué nos depara el futuro, pero sí sé algo:
-            quiero seguir creando recuerdos para ti, a pesar de no disponer
-            de mucho tiempo, me voy a esforzar para poder lograr algo 
-            contigo. Tú me motivas, tú me ayudas a ser mejor cada día.
-            Recuerda que te amo mucho, mi reina, y te protegeré y 
-            ayudaré siempre que lo necesites. Te amo, mi reina, mi linda.
-            ¡FELIZ 11  🥳 ! 
-          </p>
+            <!-- Mini características -->
+            <div class="mt-9 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                <div class="flex items-center gap-3">
+                  <i data-lucide="crosshair" class="h-5 w-5 text-cyber-green"></i>
+                  <span class="text-sm font-semibold text-white">
+                    Pensamiento ofensivo
+                  </span>
+                </div>
+              </div>
 
-          <p>
-            Gracias por ser tú.
-          </p>
+              <div class="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                <div class="flex items-center gap-3">
+                  <i data-lucide="lock-keyhole" class="h-5 w-5 text-cyber-cyan"></i>
+                  <span class="text-sm font-semibold text-white">
+                    Defensa estratégica
+                  </span>
+                </div>
+              </div>
 
-          <p>
-            Te quiero muchísimo, Ximena. ❤️
-          </p>
+              <div class="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                <div class="flex items-center gap-3">
+                  <i data-lucide="network" class="h-5 w-5 text-cyber-green"></i>
+                  <span class="text-sm font-semibold text-white">
+                    Networking
+                  </span>
+                </div>
+              </div>
 
-          <p>
-            — Con mucho cariño para ti Ximena Flavia :3
-          </p>
+              <div class="rounded-xl border border-white/5 bg-white/[0.02] p-4">
+                <div class="flex items-center gap-3">
+                  <i data-lucide="microscope" class="h-5 w-5 text-cyber-cyan"></i>
+                  <span class="text-sm font-semibold text-white">
+                    Análisis técnico
+                  </span>
+                </div>
+              </div>
+            </div>
 
-        </article>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <p class="letter-hint">
-        Haz clic sobre el sobre para abrirlo 💕
-      </p>
+    <!-- ==========================================
+         CONTACTO
+    =========================================== -->
+    <section id="contacto" class="border-t border-white/5 bg-[#090D16]">
+      <div class="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+
+        <div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+
+          <!-- Información -->
+          <div class="reveal">
+            <p class="terminal-text text-xs uppercase tracking-[0.25em] text-cyber-green">
+              04 / Contacto
+            </p>
+
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Hablemos de seguridad.
+            </h2>
+
+            <p class="mt-5 max-w-lg leading-7 text-cyber-muted">
+              ¿Tienes una infraestructura que evaluar, un proyecto
+              tecnológico o necesitas fortalecer tu postura de seguridad?
+              Puedes escribirme directamente.
+            </p>
+
+            <!-- Redes -->
+            <div class="mt-8 space-y-3">
+
+              <!-- LinkedIn -->
+              <a
+                href="https://www.linkedin.com/in/jean-piere-g-6a7903389/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition hover:border-cyber-cyan/20 hover:bg-cyber-cyan/[0.03]"
+              >
+                <div
+                  class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03]"
+                >
+                  <i data-lucide="linkedin" class="h-5 w-5 text-gray-400 group-hover:text-cyber-cyan"></i>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-white">
+                    LinkedIn
+                  </p>
+                  <p class="text-xs text-gray-500">
+                    Perfil profesional
+                  </p>
+                </div>
+
+                <i
+                  data-lucide="arrow-up-right"
+                  class="ml-auto h-4 w-4 text-gray-700 transition group-hover:text-cyber-cyan"
+                ></i>
+              </a>
+
+              <!-- GitHub -->
+              <a
+                href="https://github.com/termblack"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition hover:border-cyber-green/20 hover:bg-cyber-green/[0.03]"
+              >
+                <div
+                  class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03]"
+                >
+                  <i data-lucide="github" class="h-5 w-5 text-gray-400 group-hover:text-cyber-green"></i>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-white">
+                    GitHub
+                  </p>
+                  <p class="text-xs text-gray-500">
+                    Proyectos y código
+                  </p>
+                </div>
+
+                <i
+                  data-lucide="arrow-up-right"
+                  class="ml-auto h-4 w-4 text-gray-700 transition group-hover:text-cyber-green"
+                ></i>
+              </a>
+
+              <!-- HTB -->
+              <a
+                href="https://app.hackthebox.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.02] p-4 transition hover:border-purple-400/20 hover:bg-purple-400/[0.03]"
+              >
+                <div
+                  class="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03]"
+                >
+                  <i data-lucide="terminal-square" class="h-5 w-5 text-gray-400 group-hover:text-purple-300"></i>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold text-white">
+                    Hack The Box
+                  </p>
+                  <p class="text-xs text-gray-500">
+                    Laboratorios y práctica
+                  </p>
+                </div>
+
+                <i
+                  data-lucide="arrow-up-right"
+                  class="ml-auto h-4 w-4 text-gray-700 transition group-hover:text-purple-300"
+                ></i>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Formulario -->
+          <div class="reveal">
+            <div class="glass rounded-2xl border border-white/10 p-6 sm:p-8">
+
+              <form
+                action="https://formspree.io/"
+                method="POST"
+                class="space-y-6"
+              >
+
+                <!-- Nombre -->
+                <div>
+                  <label
+                    for="name"
+                    class="mb-2 block text-sm font-medium text-gray-300"
+                  >
+                    Nombre
+                  </label>
+
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Tu nombre"
+                    required
+                    class="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-cyber-green/40 focus:ring-1 focus:ring-cyber-green/30"
+                  />
+                </div>
+
+                <!-- Correo -->
+                <div>
+                  <label
+                    for="email"
+                    class="mb-2 block text-sm font-medium text-gray-300"
+                  >
+                    Correo
+                  </label>
+
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="tu@email.com"
+                    required
+                    class="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-cyber-green/40 focus:ring-1 focus:ring-cyber-green/30"
+                  />
+                </div>
+
+                <!-- Mensaje -->
+                <div>
+                  <label
+                    for="message"
+                    class="mb-2 block text-sm font-medium text-gray-300"
+                  >
+                    Mensaje
+                  </label>
+
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    placeholder="Cuéntame brevemente sobre tu proyecto o necesidad..."
+                    required
+                    class="w-full resize-none rounded-xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-gray-600 focus:border-cyber-green/40 focus:ring-1 focus:ring-cyber-green/30"
+                  ></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button
+                  type="submit"
+                  class="btn-primary flex w-full items-center justify-center gap-2 rounded-xl bg-cyber-green px-5 py-3.5 text-sm font-bold text-black"
+                >
+                  Enviar mensaje
+                  <i data-lucide="send" class="h-4 w-4"></i>
+                </button>
+
+                <p class="text-center text-xs text-gray-600">
+                  Este formulario puede conectarse directamente con Formspree.
+                </p>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
   </main>
 
-  <footer>
-    Hecho especialmente para Ximena ❤️
+  <!-- ==========================================
+       FOOTER
+  =========================================== -->
+  <footer class="border-t border-white/5 bg-[#07090E]">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 sm:px-8 md:flex-row md:items-center md:justify-between">
+
+      <p class="terminal-text text-xs text-gray-600">
+        © <span id="year"></span> Jean Piere Guzmán. All systems secured.
+      </p>
+
+      <p class="terminal-text text-xs text-gray-700">
+        CYBERSECURITY / NETWORKS / SECURITY
+      </p>
+
+    </div>
   </footer>
 
+  <!-- ==========================================
+       JAVASCRIPT MÍNIMO
+  =========================================== -->
   <script>
-    /* ============================================
-       CORAZONES DE FONDO
-    ============================================ */
+    document.addEventListener("DOMContentLoaded", () => {
 
-    const heartContainer = document.getElementById("heartContainer");
+      /* Inicializar iconos Lucide */
+      lucide.createIcons();
 
-    function createFloatingHeart() {
-      const heart = document.createElement("span");
+      /* Año automático del footer */
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-      heart.className = "floating-heart";
-      heart.textContent = Math.random() > 0.25 ? "♡" : "♥";
+      /* ========================================
+         MENÚ MÓVIL
+      ======================================== */
+      const menuButton = document.getElementById("menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (12 + Math.random() * 24) + "px";
-      heart.style.animationDuration = (7 + Math.random() * 9) + "s";
-      heart.style.animationDelay = Math.random() * 3 + "s";
+      menuButton.addEventListener("click", () => {
+        const isOpen = !mobileMenu.classList.contains("hidden");
 
-      heartContainer.appendChild(heart);
+        mobileMenu.classList.toggle("hidden");
 
-      setTimeout(() => {
-        heart.remove();
-      }, 18000);
-    }
+        menuButton.setAttribute(
+          "aria-expanded",
+          String(!isOpen)
+        );
 
-    for (let i = 0; i < 18; i++) {
-      createFloatingHeart();
-    }
+        menuButton.innerHTML = isOpen
+          ? '<i data-lucide="menu" class="h-5 w-5"></i>'
+          : '<i data-lucide="x" class="h-5 w-5"></i>';
 
-    setInterval(createFloatingHeart, 650);
+        lucide.createIcons();
+      });
 
+      /* Cerrar menú al hacer click en un enlace */
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
 
-    /* ============================================
-       ENTRADA
-    ============================================ */
+          menuButton.setAttribute("aria-expanded", "false");
 
-    const enterButton = document.getElementById("enterButton");
-    const welcomeScreen = document.getElementById("welcomeScreen");
-    const mainContent = document.getElementById("mainContent");
+          menuButton.innerHTML =
+            '<i data-lucide="menu" class="h-5 w-5"></i>';
 
-    enterButton.addEventListener("click", () => {
-      welcomeScreen.classList.add("hidden");
-
-      setTimeout(() => {
-        mainContent.classList.add("show");
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
+          lucide.createIcons();
         });
-      }, 350);
-    });
+      });
 
+      /* ========================================
+         REVEAL ON SCROLL
+      ======================================== */
+      const revealElements = document.querySelectorAll(".reveal");
 
-    /* ============================================
-       BOTÓN "NO" FUGITIVO
-    ============================================ */
-
-    const noButton = document.getElementById("noButton");
-    const answerArea = document.getElementById("answerArea");
-
-    function moveNoButton() {
-      const areaRect = answerArea.getBoundingClientRect();
-      const buttonRect = noButton.getBoundingClientRect();
-
-      const maxX = Math.max(0, areaRect.width - buttonRect.width);
-      const maxY = Math.max(0, areaRect.height - buttonRect.height);
-
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
-
-      noButton.style.position = "absolute";
-      noButton.style.left = randomX + "px";
-      noButton.style.top = randomY + "px";
-
-      noButton.style.transform =
-        `rotate(${(-8 + Math.random() * 16).toFixed(1)}deg)`;
-    }
-
-    noButton.addEventListener("mouseenter", moveNoButton);
-
-    noButton.addEventListener("touchstart", (event) => {
-      event.preventDefault();
-      moveNoButton();
-    });
-
-    noButton.addEventListener("focus", moveNoButton);
-
-
-    /* ============================================
-       BOTÓN "SÍ"
-    ============================================ */
-
-    const yesButton = document.getElementById("yesButton");
-
-    yesButton.addEventListener("click", () => {
-      createCelebration();
-
-      yesButton.textContent = "Sabía que dirías que sí ❤️";
-
-      setTimeout(() => {
-        yesButton.textContent = "Sí ❤️";
-      }, 3000);
-    });
-
-    function createCelebration() {
-      const symbols = ["❤️", "💕", "💖", "💗", "💘", "♡"];
-
-      for (let i = 0; i < 65; i++) {
-        const heart = document.createElement("span");
-
-        heart.className = "celebration-heart";
-        heart.textContent =
-          symbols[Math.floor(Math.random() * symbols.length)];
-
-        const startX = window.innerWidth / 2;
-        const startY = window.innerHeight * 0.65;
-
-        heart.style.left = startX + "px";
-        heart.style.top = startY + "px";
-
-        heart.style.setProperty(
-          "--x",
-          `${-window.innerWidth / 2 + Math.random() * window.innerWidth}px`
-        );
-
-        heart.style.setProperty(
-          "--y",
-          `${-100 - Math.random() * (window.innerHeight * 0.9)}px`
-        );
-
-        heart.style.setProperty(
-          "--rotate",
-          `${-360 + Math.random() * 720}deg`
-        );
-
-        heart.style.animationDuration =
-          `${1.5 + Math.random() * 1.6}s`;
-
-        document.body.appendChild(heart);
-
-        setTimeout(() => {
-          heart.remove();
-        }, 3500);
-      }
-    }
-
-
-    /* ============================================
-       TARJETAS CON ANIMACIÓN AL HACER SCROLL
-    ============================================ */
-
-    const messageCards = document.querySelectorAll(".message-card");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      {
-        threshold: 0.2
-      }
-    );
-
-    messageCards.forEach((card) => {
-      observer.observe(card);
-    });
-
-
-    /* ============================================
-       CARTA / SOBRE
-    ============================================ */
-
-    const envelope = document.getElementById("envelope");
-
-    envelope.addEventListener("click", () => {
-      envelope.classList.toggle("open");
-    });
-
-
-    /* ============================================
-       EXTRA:
-       CLICK EN CUALQUIER PARTE CREA UN PEQUEÑO ❤️
-    ============================================ */
-
-    document.addEventListener("click", (event) => {
-
-      if (
-        event.target === noButton ||
-        event.target === yesButton ||
-        event.target === enterButton
-      ) {
-        return;
-      }
-
-      const miniHeart = document.createElement("span");
-
-      miniHeart.textContent = "♡";
-      miniHeart.style.position = "fixed";
-      miniHeart.style.left = event.clientX + "px";
-      miniHeart.style.top = event.clientY + "px";
-      miniHeart.style.pointerEvents = "none";
-      miniHeart.style.zIndex = "998";
-      miniHeart.style.fontSize = "20px";
-      miniHeart.style.color = "#d66f9a";
-
-      miniHeart.animate(
-        [
-          {
-            transform: "translateY(0) scale(0.5)",
-            opacity: 1
-          },
-          {
-            transform: "translateY(-70px) scale(1.5)",
-            opacity: 0
-          }
-        ],
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
         {
-          duration: 900,
-          easing: "ease-out"
+          threshold: 0.12
         }
       );
 
-      document.body.appendChild(miniHeart);
+      revealElements.forEach((element) => {
+        observer.observe(element);
+      });
 
-      setTimeout(() => {
-        miniHeart.remove();
-      }, 1000);
     });
   </script>
 
 </body>
 </html>
-```
